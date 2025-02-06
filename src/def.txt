@@ -1,0 +1,81 @@
+what is up with 13mb worth of data set
+
+{
+        "url": "https://www.amazon.co.uk/dp/B07B8MD3H3",
+        "title": "Girls Laceless Canvas Trainer Slip On Shoes UK Childrens Size",
+        "asin": "B07B8MD3H3",
+        "price": "\u00a36.99",
+        "brand": "Visit the ShimmerAndShine Store",
+        "product_details": "Is Discontinued By Manufacturer\n\u200f\n:\n\u200e\n\nNo\n\n\nPackage Dimensions\n\u200f\n:\n\u200e\n\n16.6 x 16 x 8.4 cm; 220 Grams\n\n\nDate First Available\n\u200f\n:\n\u200e\n\n6 Mar. 2018\n\n\nASIN\n\u200f\n:\n\u200e\n\nB07B8LV2VV\n\n\nManufacturer reference\n\u200f\n:\n\u200e\n\n60331S\n\n\nDepartment\n\u200f\n:\n\u200e\n\nGirl's",
+        "breadcrumbs": "Shoes/Girls' Shoes/Fashion & Athletic Trainers/Fashion Trainers",
+        "images_list": [
+            "https://m.media-amazon.com/images/I/41LcjuFATtL.jpg",
+            "https://m.media-amazon.com/images/I/41K1vTyWXqL.jpg",
+            "https://m.media-amazon.com/images/I/41-2wd1wguL.jpg"
+        ],
+        "features": [
+            {
+                "Outer Material": "Synthetic"
+            },
+            {
+                "Inner Material": "Manmade"
+            },
+            {
+                "Sole": "Synthetic"
+            },
+            {
+                "Closure": "Pull On"
+            },
+            {
+                "Heel Type": "Flat"
+            },
+            {
+                "Shoe Width": "Normal"
+            }
+        ]
+    },
+
+
+    icons i could use
+    <TfiViewListAlt /><IoGridOutline />
+
+    {
+        "url": "https://www.amazon.co.uk/dp/B01614251K",
+        "title": "Kappa Delhi Footwear Unisex, Mesh, Women's Low-Top Sneakers",
+        "asin": "B01614251K",
+        "price": "\u00a346.18",
+        "brand": "Visit the Kappa Store",
+        "product_details": "Date First Available\n\u200f\n:\n\u200e\n\n30 Dec. 2015\n\n\nManufacturer\n\u200f\n:\n\u200e\n\nKappa\n\n\nASIN\n\u200f\n:\n\u200e\n\nB01614FQP2\n\n\nItem model number\n\u200f\n:\n\u200e\n\n242105\n\n\nDepartment\n\u200f\n:\n\u200e\n\nWomen's",
+        "breadcrumbs": "Shoes/Women's Shoes/Fashion & Athletic Trainers/Fashion Trainers",
+        "images_list": [
+            "https://m.media-amazon.com/images/I/41MfJGQsSBL.jpg",
+            "https://m.media-amazon.com/images/I/519qDn3yq-L.jpg",
+            "https://m.media-amazon.com/images/I/41rCXl8bBcL.jpg",
+            "https://m.media-amazon.com/images/I/31Acajc-xYL.jpg",
+            "https://m.media-amazon.com/images/I/413wcLbldIL.jpg",
+            "https://m.media-amazon.com/images/I/41Pi0Vfo+QL.jpg",
+            "https://m.media-amazon.com/images/I/41e05YNjCrL.jpg"
+        ],
+        "features": [
+            {
+                "Outer Material": "Synthetic"
+            },
+            {
+                "Inner Material": "Mesh"
+            },
+            {
+                "Sole": "Manmade"
+            },
+            {
+                "Closure": "Lace-Up"
+            },
+            {
+                "Heel Type": "Flat"
+            },
+            {
+                "Shoe Width": "Medium"
+            }
+        ]
+    }
+remve bg api key
+    P3SgSqEqzA5jgNmupWuftgBo
