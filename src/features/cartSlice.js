@@ -74,7 +74,7 @@ export const cartSlice = createSlice({
                 return err;
             }
         },
-        removeitem(state, action) {
+        removeItem(state, action) {
             const productId = action.payload;
             let slicer = 0
             try {
@@ -106,5 +106,5 @@ export const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, removeFromCart, clearCart, removeitem } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart, removeItem } = cartSlice.actions;
 export default cartSlice.reducer;
