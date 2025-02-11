@@ -30,21 +30,29 @@ export const wishListSlice = createSlice({
         },
         removeitem(state, action) {
             const productId = action.payload;
-            let slicer = 0
-            try {
-                const exist = state.list.map((product, index) => {
-                    if (product.asin === productId.asin) {
-                        slicer = index
-                        return slicer
-                    }
-                });
-                console.log(exist);
-                
-                state.list.splice(slicer, 1)
+            const productIndex = state.list.findIndex((item) => item.asin === productId);
 
-            } catch (err) {
-                return err
-            }
+            if (productIndex !== -1) {
+                // const product = state.list[productIndex];
+                state.list.splice(productIndex, 1);
+        
+                sessionStorage.setItem("wishlist", JSON.stringify(state.list));
+              }
+            // let slicer = 0
+            // try {
+            //     const exist = state.list.map((product, index) => {
+            //         if (product.asin === productId.asin) {
+            //             slicer = index
+            //             return slicer
+            //         }
+            //     });
+            //     console.log(exist);
+                
+            //     state.list.splice(slicer, 1)
+
+            // } catch (err) {
+            //     return err
+            // }
 
         },
         clearList(state) {

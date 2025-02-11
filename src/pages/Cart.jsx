@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 // import { removeFromCart } from "../../features/slices/cartSlice";
 import { Link } from "react-router-dom";
 import CartItems from "../Components/CartItems";
+import { clearCart } from "../features/cartSlice";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -56,7 +57,7 @@ const Cart = () => {
           </div>
           <div
             className="clear p-5 max-lg:p-0  max-lg:flex justify-center items-center cursor-pointer hover:text-white max-lg:h-[50px] font-bold bg-transparent rounded-md hover:bg-[#232324] text-center transition-all duration-300 border max-lg:text-[14px] max-lg:w-full"
-            onClick={() => dispatch(clearFirestoreCart())}
+            onClick={() => dispatch(clearCart())}
           >
             Clear Cart
           </div>

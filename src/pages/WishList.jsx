@@ -1,11 +1,7 @@
 import { IoTrashOutline } from "react-icons/io5";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addToWishList,
-  clearList,
-  removeitem,
-} from "../features/wishListSlice";
+import { clearList, removeitem } from "../features/wishListSlice";
 import { Link } from "react-router-dom";
 
 const WishList = () => {
@@ -28,13 +24,7 @@ const WishList = () => {
           {list.map((item, index) => {
             return (
               <>
-                <div className="flex  items-center mx-auto h-[70px]  justify-start  gap20 my-10  max-md:text-[14px] relative max-md:h-[50px] max-md:gap10">
-                  <IoTrashOutline
-                    className="absolute top-1/2 text-[24px] max-lg:-left-6 max-lg:text-[18px] -translate-y-1/2 max-md:-left-5 max-md:text-[16px]"
-                    onClick={() =>
-                      dispatch(removeFromFirestoreWishList(item.id))
-                    }
-                  />
+                <div className="flex items-center mx-auto h-[70px]  justify-between  gap20 my-10  max-md:text-[14px] relative max-md:h-[50px] max-md:gap10">
                   <Link
                     className="flex-grow w-[500px] max-md:w-[200px] max-md:text-[12px]  max-lg:w-[300px]"
                     to={`/filteredProducts/${item.asin}`}
@@ -50,8 +40,11 @@ const WishList = () => {
                       {item.name}
                     </div>
                   </Link>
-                  <div className="w-[120px] max-lg:w-[100px] max-md:w-[70px] max-md:text-[12px]  text-center  font-bold pri">
+                  <div className="w-[120px] max-lg:w-[100px] max-md:w-[70px] max-md:text-[12px] text-center font-bold flex flex-col gap-3">
                     £{item.price}
+                    <div className="p-2 bg-[red] text-white rounded">
+                      Remove
+                    </div>
                   </div>
                 </div>
                 <hr />
@@ -60,7 +53,7 @@ const WishList = () => {
           })}
         </div>
       ) : (
-        <div className="none mx-auto w-[80%]  max-lg:w-[90%] relative text-center text-[32px] font-bold h-[200px] flex items-center justify-center">
+        <div className="mx-auto w-[80%]  max-lg:w-[90%] relative text-center text-[32px] font-bold h-[70vh] flex items-center justify-center">
           No items avaiable in your wish list
         </div>
       )}

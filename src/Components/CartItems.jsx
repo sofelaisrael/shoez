@@ -18,9 +18,11 @@ const CartItems = ({ item }) => {
           <img className="px-10 max-md:px-5" src={elem.img} alt="" />
         </div>
         <div className="content px-5 w-2/3 max-md:w-full">
-          <div className="title text-bold text-[32px] pb-5">{elem.name}</div>
+          <div className="title text-bold text-[32px] pb-5 leading-[30px] max-md:leading-[20px] max-md:text-[20px]">
+            {elem.name}
+          </div>
 
-          <div className="prices font-extrabold">
+          <div className="prices font-extrabold max-md:text-[12px]">
             <span className="text-[gray]">Price: </span>£{elem.price}
           </div>
 
@@ -31,7 +33,7 @@ const CartItems = ({ item }) => {
             >
               -
             </span>
-            <span className="h- -t -b px-4 max-md:p-">{item.amount}</span>
+            <span className="px-4 max-md:py-0 max-md:px-1">{item.amount}</span>
             <span
               className=" px-2 cursor-pointer "
               onClick={() =>
@@ -50,22 +52,22 @@ const CartItems = ({ item }) => {
             </span>
           </div>
 
-          <div className="amount font-extrabold">
+          <div className="amount font-extrabold max-md:text-[12px]">
             <span className="text-[gray]">Total: </span>£
             {item.totalPrice.toFixed(2)}
           </div>
 
-          <div className="btns pt-5">
+          <div className="btns pt-5 max-md:pt-2">
             <Link
               className="flex-grow w-[500px] max-md:w-[200px] max-md:text-[12px]  max-lg:w-[300px]"
               to={`/filteredProducts/${item.asin}`}
             >
-              <button className="bg-black text-white rounded px-4 py-2 font-bold mr-3 text-[18px]">
+              <button className="bg-black text-white rounded px-4 py-2 font-bold mr-3 text-[18px] max-md:text-[12px]">
                 Visit
               </button>
             </Link>
             <button
-              className="bg-[red] text-[18px] text-white rounded px-4 py-2 font-bold"
+              className="bg-[red] text-[18px] max-md:text-[12px] text-white rounded px-4 py-2 font-bold"
               onClick={() => dispatch(removeItem(item.asin))}
             >
               Remove
