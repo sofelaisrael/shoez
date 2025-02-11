@@ -2,12 +2,6 @@ import { IoTrashOutline } from "react-icons/io5";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { removeFromCart } from "../../features/slices/cartSlice";
-import {
-  addToCart,
-  removeFromCart,
-  clearCart,
-  removeItem,
-} from "../features/cartSlice";
 import { Link } from "react-router-dom";
 import CartItems from "../Components/CartItems";
 
@@ -32,7 +26,7 @@ const Cart = () => {
           />
         </>
       ) : cart.length > 0 ? (
-        <div className="mx-auto px-10 max-md:px-5 relative flex flex-col gap-5">
+        <div className="mx-auto relative flex flex-col gap-5 lg:w-[80%] w-[90%] py-10">
           {cart.map((item) => (
             <React.Fragment key={item.id}>
               <CartItems item={item} />
@@ -42,7 +36,7 @@ const Cart = () => {
         </div>
       ) : (
         !loading && (
-          <div className="none mx-auto w-[80%]  max-lg:w-[90%] relative text-center text-[32px] font-bold h-[200px] flex items-center justify-center">
+          <div className="none mx-auto w-[80%]  max-lg:w-[90%] relative text-center text-[32px] font-bold h-[70vh] flex items-center justify-center">
             No items available in your cart
           </div>
         )

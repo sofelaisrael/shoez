@@ -40,7 +40,7 @@ const Home = () => {
 
     return (
         <div>
-            <div className="grid gridows-2 max-lg:grid-rws-6 grid-cols-5 max-lg:grid-cols-3 p-10 max-md:px-5 max-sm:px-0 border border-[#0a0a0a] max-sm:pb-5 pt-20">
+            <div className="grid gridows-2 max-lg:grid-rws-6 grid-cols-5 max-lg:grid-cols-3 p-10 max-md:px-5 max-sm:px-0 border-b border-[#0a0a0a] max-sm:pb-5 pt-20">
                 <div className="row-span-4 col-span-3 h-[500px] max-lg:h-ful p-2 max-lg:row-span-2 max-md:h-[300px]">
                     <div className="flex justify-center items-start bg-[#333] relative w-full overflow-hidden  h-full rounded-lg flex-col con">
                         <span className="text-white font-bold text-[32px] px-10 z-20" >

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import {
   addToCart,
-  removeFromCart,
+  removeOneFromCart,
   removeItem,
 } from "../features/cartSlice";
 import { Link } from "react-router-dom";
@@ -27,7 +27,7 @@ const CartItems = ({ item }) => {
           <div className="w-fit flex items-center p-2 text-[18px] max-md:text-[14px] my-3 text-start font-bold qty border">
             <span
               className=" px-2 cursor-pointer"
-              onClick={() => dispatch(removeItem(item.asin))}
+              onClick={() => dispatch(removeOneFromCart(item.asin))}
             >
               -
             </span>
@@ -66,7 +66,7 @@ const CartItems = ({ item }) => {
             </Link>
             <button
               className="bg-[red] text-[18px] text-white rounded px-4 py-2 font-bold"
-              onClick={() => dispatch(removeFromCart(item.id))}
+              onClick={() => dispatch(removeItem(item.asin))}
             >
               Remove
             </button>

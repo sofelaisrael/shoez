@@ -1,110 +1,77 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const cartSlice = createSlice({
-    name: "cart",
-    initialState: {
-        cart: [],
-        totalAmount: 0,
-        totalPrice: 0,
+const initialState = {
+  cart: [],
+  totalAmount: 0,
+  totalPrice: 0,
+};
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    addToCart(state, action) {
+      const product = action.payload;
+      const exist = state.cart.find((item) => item.asin === product.asin);
+
+      if (exist) {
+        exist.amount += product.amount;
+        exist.totalPrice += product.price * product.amount;
+      } else {
+        state.cart.push({
+          ...product,
+          totalPrice: product.price * product.amount,
+        });
+      }
+
+      state.totalAmount += product.amount;
+      state.totalPrice += product.price * product.amount;
+
+      sessionStorage.setItem("cart", JSON.stringify(state.cart));
     },
-    reducers: {
-        addToCart(state, action) {
-            const productId = action.payload;
-            try {
-                const exist = state.cart.find(
-                    (product) =>
-                        product.asin === productId.asin
-                );
-                console.log(exist, productId.asin);
-                if (exist) {
-                    exist.amount += parseFloat(productId.amount);
-                    exist.totalPrice += parseFloat(productId.price) * parseFloat(productId.amount);
-                    state.totalAmount += parseFloat(productId.amount);
-                    state.totalPrice += parseFloat(productId.price) * parseFloat(productId.amount);
-                } else {
-                    state.cart.push({
-                        price: parseFloat(productId.price),
-                        amount: productId.amount,
-                        totalPrice: parseFloat(productId.price) * productId.amount,
-                        name: productId.name,
-                        text: productId.text,
-                        asin: productId.asin,
-                        img: productId.img
-                    });
-                    state.totalAmount += parseFloat(productId.amount);
-                    state.totalPrice += parseFloat(productId.price) * parseFloat(productId.amount);
-                    console.log(action.payload.amount, state.totalAmount, state.totalPrice);
-                    sessionStorage.setItem('cart', {
-                        price: parseFloat(productId.price),
-                        amount: productId.amount,
-                        totalPrice: parseFloat(productId.price) * productId.amount,
-                        name: productId.name,
-                        text: productId.text,
-                        asin: productId.asin,
-                        img: productId.img
-                    })
 
-                }
+    removeOneFromCart(state, action) {
+      const productId = action.payload;
+      const product = state.cart.find((item) => item.asin === productId);
 
-            } catch (err) {
-                return err;
-            }
-        },
-        removeFromCart(state, action) {
-            const productId = action.payload;
-            try {
-                const exist = state.cart.find(
-                    (product) =>
-                        product.asin === productId.asin
-                );
-                if (exist.amount === 1) {
-                    state.cart = state.cart.filter(
-                        (product) =>
-                            product.asin !== productId.asin
-                    );
-                    state.totalAmount--;
-                    state.totalPrice -= productId.price;
-                } else {
-                    exist.amount--;
-                    exist.totalPrice -= productId.price;
-                    state.totalAmount--;
-                    state.totalPrice -= productId.price;
-                }
-            } catch (err) {
-                return err;
-            }
-        },
-        removeItem(state, action) {
-            const productId = action.payload;
-            let slicer = 0
-            try {
-                // const exist = state.cart.find(
-                //     (product) =>
-                //         product.asin === productId.asin
-                // );
-                const exist = state.cart.map((product, index) => {
-                    if (product.asin === productId.asin) {
-                        slicer = index
-                        return slicer
-                    }
-                });
-                state.totalAmount--;
-                state.totalPrice-= parseFloat(productId.price)
-                state.cart.splice(slicer, 1)
-                console.log(exist, slicer);
-
-            } catch (err) {
-                return err
-            }
-
-        },
-        clearCart(state) {
-            state.cart = []
-            state.totalAmount = 0
-            state.totalPrice = 0
+      if (product) {
+        if (product.amount > 1) {
+          product.amount--;
+          product.totalPrice -= product.price;
+          state.totalAmount--;
+          state.totalPrice -= product.price;
+        } else {
+          state.cart = state.cart.filter((item) => item.asin !== productId);
+          state.totalAmount--;
+          state.totalPrice -= product.price;
         }
+
+        sessionStorage.setItem("cart", JSON.stringify(state.cart));
+      }
     },
+
+    removeItem(state, action) {
+      const productId = action.payload;
+      const productIndex = state.cart.findIndex((item) => item.asin === productId);
+
+      if (productIndex !== -1) {
+        const product = state.cart[productIndex];
+        state.totalAmount -= product.amount;
+        state.totalPrice -= product.totalPrice;
+        state.cart.splice(productIndex, 1);
+
+        sessionStorage.setItem("cart", JSON.stringify(state.cart));
+      }
+    },
+
+    clearCart(state) {
+      state.cart = [];
+      state.totalAmount = 0;
+      state.totalPrice = 0;
+      sessionStorage.removeItem("cart");
+    },
+  },
 });
 
-export const { addToCart, removeFromCart, clearCart, removeItem } = cartSlice.actions;
+export const { addToCart, removeOneFromCart, removeItem, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;

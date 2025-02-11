@@ -57,7 +57,7 @@ const SingleProduct = () => {
     }
 
     const checkselect = (ind) => {
-        const items = document.querySelectorAll('.item')
+        const items = document.querySelectorAll('.items')
         const img = document.querySelector('.selimg')
         img.src = items[ind].querySelector('img').src
         items.forEach(item => item.classList.remove('selected'))
@@ -122,7 +122,7 @@ const SingleProduct = () => {
                       <div className="aside flex gap-5 py-7 pl-2 overflow-y-hidden overflow-x-scroll">
                         {item.images_list.map((img, index) => (
                           <div
-                            className="min-w-[150px] max-xl:min-w-[100px] max-xl:h-[50px] h-[100px] border flex rounded-md  justify-center items-center ite "
+                            className="min-w-[150px] max-xl:min-w-[100px] max-xl:h-[50px] h-[100px] border flex rounded-md  justify-center items-center items "
                             onMouseEnter={() => checkselect(index)}
                           >
                             <img
