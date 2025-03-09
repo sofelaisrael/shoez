@@ -106,7 +106,7 @@ const FilteredProducts = () => {
                 <div className="absolute w-[150px] circ rounded-full bg-blue-400 mix-blend-difference h-[150px] top-[25%] left-[65%]"></div>
             </div>
             <div className="grid grid-cols-7 max-lg:flex  max-lg:flex-col-reverse pb-10 ">
-                <div className="filters px-10 col-span-2 max-lg:h-full flex flex-col justify- py-10 gap-2 items-center ">
+                <div className="filters max-md:px-5 px-10 col-span-2 max-lg:h-full flex flex-col justify- py-10 gap-2 items-center ">
                     {/* <h4 class="sidebar">Top Categories</h4> */}
                     <FilterInput data={breadcrumbs} setArr={setCate} name='Category' content='content1' select='select1' />
                     <FilterInput data={brands} setArr={setBrds} content='content2' select='select2' name='Brand' />
@@ -130,7 +130,7 @@ const FilteredProducts = () => {
 
                 {
                     currentItems.length > 0 ? (
-                        <div id="data-container" className="grid grid-cols-4  gap-10 p-10 col-span-5 max-lg:col-span-full relative max-lg:grid-cols-3 max-md:grid-cols-2">
+                        <div id="data-container" className="grid grid-cols-4  gap-10 p-10 max-md:p-5 max-md:gap-5 col-span-5 max-lg:col-span-full relative max-lg:grid-cols-3 max-md:grid-cols-2">
                             {currentItems.map((item, index) => (
                                 <FilteredItems data={item} />
                             ))}
