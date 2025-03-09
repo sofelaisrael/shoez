@@ -5,9 +5,10 @@ import {
   removeOneFromCart,
   removeItem,
 } from "../features/cartSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CartItems = ({ item }) => {
+  const navigate = useNavigate()
   const elem = item;
   const dispatch = useDispatch();
 
@@ -58,16 +59,13 @@ const CartItems = ({ item }) => {
           </div>
 
           <div className="btns pt-5 max-md:pt-2">
-            <Link
-              className="flex-grow w-[500px] max-md:w-[200px] max-md:text-[12px]  max-lg:w-[300px]"
-              to={`/filteredProducts/${item.asin}`}
-            >
-              <button className="bg-black text-white rounded px-4 py-2 font-bold mr-3 text-[18px] max-md:text-[12px]">
+           
+              <button className="bg-black text-white rounded px-4 py-2 font-bold mr-3 text-[18px] max-md:text-[12px] cursor-pointer" onClick={() => navigate(`/filteredProducts/${item.asin}`)}>
                 Visit
               </button>
-            </Link>
+            {/* </Link> */}
             <button
-              className="bg-[red] text-[18px] max-md:text-[12px] text-white rounded px-4 py-2 font-bold"
+              className="bg-[red] text-[18px] max-md:text-[12px] text-white rounded px-4 py-2 font-bold cursor-pointer"
               onClick={() => dispatch(removeItem(item.asin))}
             >
               Remove

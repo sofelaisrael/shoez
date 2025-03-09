@@ -12,12 +12,6 @@ const Product = ({ data }) => {
 
     const defdata = data
 
-    
-    const getLastPrice = (price) => {
-        const last = price.lastIndexOf('£')
-        return price.slice(last + 1)
-    }
-
     return (
         <Link to={`/filteredProducts/${defdata.asin}`}  className="col-span-1 border rounded-lg p-2">
             <div className="product-item w-[100%] mx-auto">
@@ -28,16 +22,16 @@ const Product = ({ data }) => {
                     }}>
                         <Link to={`/filteredProducts/${defdata.asin}`}>
 
-                            {defdata.images_list.length > 1 ? (
-                                <div className="imgs">
+                            {/* {defdata.images_list.length > 1 ? (
+                                <div className="imgs"> */}
 
-                                    <img src={defdata.images_list[1]} className="w p-16" />
-                                    <img src={defdata.images_list[0]} className="w p-16" />
-                                </div>
+                                    {/* <img src={defdata.images_list[1]} className="w p-5 lg:p-12" /> */}
+                                    <img src={defdata.images_list[0]} className="w p-5 lg:p-12" />
+                                {/* </div>
                             ) : (
                                 <img src={defdata.images_list[0]} className="w p-5" />
 
-                            )}
+                            )} */}
                         </Link>
 
                     </div>

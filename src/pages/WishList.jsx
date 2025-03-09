@@ -30,7 +30,7 @@ const WishList = () => {
                     to={`/filteredProducts/${item.asin}`}
                   >
                     <div className="lg:px-10 font-bold flex items- prod lg:flex-grow gap-10 items-center max-lg:gap-3">
-                      <div className="img h-[70px] flex  w-[100px] max-lg:w-[100px]   p2 ma-md:hidden">
+                      <div className="img h-[70px] flex w-[100px] max-lg:w-[100px]">
                         <img
                           className="w-full object-contain"
                           src={item.img}
@@ -42,7 +42,7 @@ const WishList = () => {
                   </Link>
                   <div className="w-[120px] max-lg:w-[100px] max-md:w-[70px] max-md:text-[12px] text-center font-bold flex flex-col gap-3">
                     £{item.price}
-                    <div className="p-2 bg-[red] text-white rounded">
+                    <div className="p-2 bg-[red] text-white rounded cursor-pointer">
                       Remove
                     </div>
                   </div>

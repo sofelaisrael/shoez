@@ -24,9 +24,9 @@ const Navbar = () => {
                     Shoe-z
                 </Link>
                 <div className="icons flex justify-center items-center gap-5 ">
-                    <div className="acc cursor-pointer">
+                    <Link to={'/register'} className="acc cursor-pointer">
                         <CgProfile className="text-[32px] max-md:text-[24px]" />
-                    </div>
+                    </Link>
                     <Link to={'/wishlist'} className="wish cursor-pointer">
                         <CiHeart className="text-[32px] max-md:text-[24px]" />
                     </Link>

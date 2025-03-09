@@ -43,12 +43,17 @@ const Cart = () => {
         )
       )}
       <div className="btns flex items-center justify-between max-lg:gap-3 w-[80%] max-lg:w-[90%] max-lg:flex-col mx-auto py-10">
-        <div className="shop max-lg:w-full  max-lg:h-[50px]">
+        <div className="shop max-lg:w-full flex gap-5 max-lg:flex-col max-lg:h-full max-lg:gap-2">
           <Link
             to={"/filteredProducts"}
-            className="shopping p-5 cursor-pointer text-white font-bold bg-[#232324] rounded-md max-lg:h-full  max-lg:p-0  max-lg:flex justify-center items-center block hover:bg-[#EB3E32] transition-all max-lg:text-[14px] duration-300 border max-lg:w-full text-center"
+            className="shopping p-5 cursor-pointer text-white font-bold bg-[#232324] rounded-md max-lg:h-full  max-lg:flex justify-center items-center block hover:bg-[#EB3E32] transition-all max-lg:text-[14px] duration-300 border max-lg:w-full text-center"
           >
             Continue Shopping
+          </Link>
+          <Link
+          className="p-5 max-md:p-4 font-bold border rounded-md hover:bg-[#232324] hover:text-white transition-all duration-300 text-center"
+            to={"/checkout"} >
+            Checkout
           </Link>
         </div>
         <div className="cart flex items-center gap-5  max-lg:gap-8 max-lg:flex-col-reverse max-lg:w-full ">

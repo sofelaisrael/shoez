@@ -9,6 +9,9 @@ import FilteredProducts from './pages/FilteredProducts';
 import SingleProduct from './pages/SingleProduct';
 import Cart from './pages/Cart';
 import WishList from './pages/WishList';
+import Checkout from './pages/Checkout';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <WishList />
+      },
+      {
+        path: "/checkout",
+        element: <Checkout />
+      },
+      {
+        path: "/register",
+        element: <SignUp />
+      },
+      {
+        path: "/log-in",
+        element: <SignIn />
       },
 
     ]

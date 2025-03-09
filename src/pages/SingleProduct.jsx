@@ -110,7 +110,7 @@ const SingleProduct = () => {
     
               return (
                 <div className="flex w-full">
-                  <div className="flex max-lg:flex-col w-full p-10 lg:p-20 lg:gap-20 ">
+                  <div className="flex max-lg:flex-col w-full p-10 max-md:p-5 lg:gap-20 ">
                     <div className="imageside lg:w-1/2 max-lg:w-2/3 max-md:w-full lg:sticky h-[500px] lg:h-fit top-10">
                       <div className="img lg:h-[400px] h-[350px] lg:px0 w-full flex justify-center self-start border-[3px] rounded-lg">
                         <img

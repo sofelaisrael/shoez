@@ -82,7 +82,7 @@ const Home = () => {
                 </Link>
             </div>
 
-            <div className="grid pt-20 grid-cols-3 max-lg:grid-cols-1 gap-10 px-20 max-lg:px-10 max-sm:px-5 max-md:pt-10 max-sm:pt-5">
+            {/* <div className="grid pt-20 grid-cols-3 max-lg:grid-cols-1 gap-10 px-20 max-lg:px-10 max-sm:px-5 max-md:pt-10 max-sm:pt-5">
                 <div className="flex flex-col justify-center item relative   overflow-hidden items-center border h-[250px] max-md:h-[400px] max-sm:h-[300px] col-span-1 text-white">
                     <img src={sales1} alt="" className="absolute -z-20 top-0  left-0 object-cover max-sm:h-[100%] lg:h-[100%] lg:w-full" />
                     <span className="text-[20px]">sale 50% off</span>
@@ -98,7 +98,7 @@ const Home = () => {
                     <span className="text-[20px]">sale 50% off</span>
                     <span className="font-bold text-[24px] max-lg:text-[40px] max-sm:text-[32px] uppercase">New Arrivals</span>
                 </div>
-            </div>
+            </div> */}
 
             <div className="service flex justify-between p-10 text-center mt-10 bg-[#26292e] max-md:gap-5 text-white max-md:grid grid-cols-2 max-md:p-5 ">
                 <div className="icon flex items-center gap-3 max-lg:text-[16px] max-md:text-[12px] text-[28px] jusc justify-center">
@@ -128,7 +128,7 @@ const Home = () => {
                 </Link>
             </div>
 
-            <div className="grid pt-20 grid-cols-3 max-lg:grid-cols-1 gap-10 px-20  max-md:pt-10 pb-10 max-sm:py-5 max-lg:px-10 max-sm:px-5">
+            {/* <div className="grid pt-20 grid-cols-3 max-lg:grid-cols-1 gap-10 px-20  max-md:pt-10 pb-10 max-sm:py-5 max-lg:px-10 max-sm:px-5">
                 <div className="flex flex-col justify-center item relative  overflow-hidden items-center border h-[250px] max-md:h-[400px] max-sm:h-[300px] col-span-1 text-white">
                     <img src={sales4} alt="" className="absolute -z-20 top-0 left-0 object-cover max-sm:h-[100%] lg:h-[100%] lg:w-full " />
                     <span className="text-[20px]">sale 50% off</span>
@@ -144,7 +144,7 @@ const Home = () => {
                     <span className="text-[20px]">sale 50% off</span>
                     <span className="font-bold text-[24px] max-lg:text-[40px] max-sm:text-[32px] uppercase">New Arrivals</span>
                 </div>
-            </div>
+            </div> */}
 
 
         </div>
