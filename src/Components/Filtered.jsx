@@ -1,12 +1,10 @@
 import React from 'react'
 import { singleProduct } from "../features/productSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 
 const Filtered = ({ data }) => {
     const dispatch = useDispatch()
-    const products = useSelector((state) => state.products.filteredProducts);
-    const error = useSelector((state) => state.products.error);
     return (
         <div>
             {data.map((d, index) => (

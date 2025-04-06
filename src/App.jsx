@@ -12,21 +12,13 @@ import Navbar from "./Components/Navbar";
 import ScrollToTop from "./Components/ScrollToTop";
 
 function App() {
-  const { pathname } = useLocation();
+
   return (
     <>
       <ScrollToTop />
-      {/* {pathname == "register" && console.log("dont show")}
       <Navbar />
       <Outlet />
-      <Footer /> */}
-      {pathname != "/log-in" && pathname != "/register" ? (
-        <Navbar />
-      ) : (
-        ""
-      )}
-      <Outlet />
-      {pathname != "/log-in" && pathname != "/register" ? <Footer /> : ""}
+      <Footer />
     </>
   );
 }

@@ -1,77 +1,91 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { ConvexReactClient } from "convex/react";
+import { api } from "../../convex/_generated/api";
+
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL);
 
 const initialState = {
   cart: [],
   totalAmount: 0,
   totalPrice: 0,
+  loading: false,
 };
+
+export const fetchCart = createAsyncThunk("cart/fetchCart", async (userId, { dispatch }) => {
+  try {
+    const cartItems = await convex.query(api.cart.getCart, { userId });
+    dispatch(setCart(cartItems));
+  } catch (error) {
+    console.error("Error fetching cart:", error);
+  }
+});
+
+export const addToCart = createAsyncThunk(
+  "cart/addToCart",
+  async ({ userId, product }, { dispatch }) => {
+    try {
+      await convex.mutation(api.cart.addToCart, { userId, product });
+      dispatch(fetchCart(userId));
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  }
+);
+
+export const removeOneFromCart = createAsyncThunk(
+  "cart/removeOneFromCart",
+  async ({ userId, productId }, { dispatch }) => {
+    try {
+      await convex.mutation(api.cart.removeOneFromCart, { userId, productId });
+      dispatch(fetchCart(userId)); 
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+    }
+  }
+);
+
+export const removeItem = createAsyncThunk(
+  "cart/removeItem",
+  async ({ userId, productId }, { dispatch }) => {
+    try {
+      await convex.mutation(api.cart.removeItem, { userId, productId });
+      dispatch(fetchCart(userId)); 
+    } catch (error) {
+      console.error("Error removing item from cart:", error);
+    }
+  }
+);
+
+export const clearCart = createAsyncThunk("cart/clearCart", async (userId, { dispatch }) => {
+  try {
+    await convex.mutation(api.cart.clearCart, { userId });
+    dispatch(fetchCart(userId));
+  } catch (error) {
+    console.error("Error clearing cart:", error);
+  }
+});
+
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action) {
-      const product = action.payload;
-      const exist = state.cart.find((item) => item.asin === product.asin);
-
-      if (exist) {
-        exist.amount += product.amount;
-        exist.totalPrice += product.price * product.amount;
-      } else {
-        state.cart.push({
-          ...product,
-          totalPrice: product.price * product.amount,
-        });
-      }
-
-      state.totalAmount += product.amount;
-      state.totalPrice += product.price * product.amount;
-
-      sessionStorage.setItem("cart", JSON.stringify(state.cart));
+    setCart: (state, action) => {
+      state.cart = action.payload;
+      state.totalAmount = action.payload.reduce((acc, item) => acc + item.amount, 0);
+      state.totalPrice = action.payload.reduce((acc, item) => acc + item.totalPrice, 0);
     },
-
-    removeOneFromCart(state, action) {
-      const productId = action.payload;
-      const product = state.cart.find((item) => item.asin === productId);
-
-      if (product) {
-        if (product.amount > 1) {
-          product.amount--;
-          product.totalPrice -= product.price;
-          state.totalAmount--;
-          state.totalPrice -= product.price;
-        } else {
-          state.cart = state.cart.filter((item) => item.asin !== productId);
-          state.totalAmount--;
-          state.totalPrice -= product.price;
-        }
-
-        sessionStorage.setItem("cart", JSON.stringify(state.cart));
-      }
-    },
-
-    removeItem(state, action) {
-      const productId = action.payload;
-      const productIndex = state.cart.findIndex((item) => item.asin === productId);
-
-      if (productIndex !== -1) {
-        const product = state.cart[productIndex];
-        state.totalAmount -= product.amount;
-        state.totalPrice -= product.totalPrice;
-        state.cart.splice(productIndex, 1);
-
-        sessionStorage.setItem("cart", JSON.stringify(state.cart));
-      }
-    },
-
-    clearCart(state) {
-      state.cart = [];
-      state.totalAmount = 0;
-      state.totalPrice = 0;
-      sessionStorage.removeItem("cart");
-    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchCart.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchCart.fulfilled, (state) => {
+        state.loading = false;
+      });
   },
 });
 
-export const { addToCart, removeOneFromCart, removeItem, clearCart } = cartSlice.actions;
+export const { setCart } = cartSlice.actions;
 export default cartSlice.reducer;

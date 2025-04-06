@@ -1,14 +1,32 @@
-import { IoTrashOutline } from "react-icons/io5";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { clearList, removeitem } from "../features/wishListSlice";
+import {
+  clearWishlist,
+  fetchWishlist,
+  removeFromWishlist,
+} from "../features/wishListSlice";
+import { useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 
 const WishList = () => {
   const list = useSelector((state) => state.wishlist.list);
   const dispatch = useDispatch();
   console.log(list);
+  const { user } = useUser();
 
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(fetchWishlist(user.id));
+    }
+  }, [dispatch, user?.id]);
+
+  const handleRemoveFromWishlist = (productId) => {
+    if (user?.id) dispatch(removeFromWishlist({ userId: user.id, productId }));
+  };
+
+  const handleClearWishlist = () => {
+    if (user?.id) dispatch(clearWishlist(user.id));
+  };
   return (
     <div className="min-h-[100vh] pt-20">
       <div className="flex w-[80%] max-lg:w-[90%] items-center mx-auto h-[70px] max-md:h-[50px] max-md:gap10 bg-[#f7f7f7] justify-end  gap20 max-md:text-[14px] max-md:w-[90%]">
@@ -42,7 +60,10 @@ const WishList = () => {
                   </Link>
                   <div className="w-[120px] max-lg:w-[100px] max-md:w-[70px] max-md:text-[12px] text-center font-bold flex flex-col gap-3">
                     £{item.price}
-                    <div className="p-2 bg-[red] text-white rounded cursor-pointer">
+                    <div
+                      className="p-2 bg-[red] text-white rounded cursor-pointer"
+                      onClick={() => handleRemoveFromWishlist(item.asin)}
+                    >
                       Remove
                     </div>
                   </div>
@@ -70,7 +91,7 @@ const WishList = () => {
         <div className="cart flex items-center gap-5  max-lg:gap-8 max-lg:flex-col-reverse max-lg:w-full ">
           <div
             className="clear p-5 max-lg:p-0  max-lg:flex justify-center items-center cursor-pointer hover:text-white max-lg:h-[50px] font-bold bg-transparen rounded-md hover:bg-[#232324] text-center transition-all duration-300 border max-lg:text-[14px] max-lg:w-full"
-            onClick={() => dispatch(clearList())}
+            onClick={handleClearWishlist}
           >
             Clear List
           </div>

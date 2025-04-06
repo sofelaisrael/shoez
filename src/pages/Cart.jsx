@@ -1,20 +1,23 @@
-import { IoTrashOutline } from "react-icons/io5";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { removeFromCart } from "../../features/slices/cartSlice";
+import { CgSpinnerTwo } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import CartItems from "../Components/CartItems";
-import { clearCart } from "../features/cartSlice";
+import { clearCart, fetchCart } from "../features/cartSlice";
+import { useUser } from "@clerk/clerk-react";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
   const totalPrice = useSelector((state) => state.cart.totalPrice);
   const loading = useSelector((state) => state.cart.loading);
-  const getLastPrice = (price) => {
-    const last = price.lastIndexOf("£");
-    return price.slice(last + 1);
-  };
   const dispatch = useDispatch();
+  const { user } = useUser();
+
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(fetchCart(user.id));
+    }
+  }, [dispatch, user?.id]);
 
   return (
     <div className="min-h-[100vh] pt-20">
@@ -31,7 +34,6 @@ const Cart = () => {
           {cart.map((item) => (
             <React.Fragment key={item.id}>
               <CartItems item={item} />
-              {/* <hr /> */}
             </React.Fragment>
           ))}
         </div>
@@ -51,8 +53,9 @@ const Cart = () => {
             Continue Shopping
           </Link>
           <Link
-          className="p-5 max-md:p-4 font-bold border rounded-md hover:bg-[#232324] hover:text-white transition-all duration-300 text-center"
-            to={"/checkout"} >
+            className="p-5 max-md:p-4 font-bold border rounded-md hover:bg-[#232324] hover:text-white transition-all duration-300 text-center"
+            to={"/checkout"}
+          >
             Checkout
           </Link>
         </div>
@@ -62,7 +65,7 @@ const Cart = () => {
           </div>
           <div
             className="clear p-5 max-lg:p-0  max-lg:flex justify-center items-center cursor-pointer hover:text-white max-lg:h-[50px] font-bold bg-transparent rounded-md hover:bg-[#232324] text-center transition-all duration-300 border max-lg:text-[14px] max-lg:w-full"
-            onClick={() => dispatch(clearCart())}
+            onClick={() => dispatch(clearCart(user.id))}
           >
             Clear Cart
           </div>
