@@ -28,7 +28,7 @@ const Navbar = () => {
         <div className="nav-actions">
           <Unauthenticated>
             <SignInButton mode="modal">
-              <button className="sign-in-button">Sign In</button>
+              <button className="sign-in-button bg-[#eb3E32] font-bold rounded-full px-5 py-1">Sign In</button>
             </SignInButton>
           </Unauthenticated>
         </div>

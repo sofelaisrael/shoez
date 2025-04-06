@@ -8,6 +8,7 @@ import data from "../data/amazon_uk_shoes_dataset.json";
 import Product from "../Components/Product";
 import hero from "../assets/Puma.png";
 import { useUser } from "@clerk/clerk-react";
+import { Authenticated, Unauthenticated } from "convex/react";
 
 const SingleProduct = () => {
   const dispatch = useDispatch();
@@ -211,70 +212,72 @@ const SingleProduct = () => {
                     {item.brand.toUpperCase()}
                   </div>
 
-                  <div className="flex mt-10 gap-5 max-lg:mt-5">
-                    <div className="amount">
-                      <div className="w-[80px] h-[50px] border rounded-none">
-                        <input
-                          className="border text-xl w-full h-[30px] text-center focus:outline-none "
-                          type="text"
-                          value={num}
-                          onChange={(e) => setNum(e.target.value)}
-                        />
-                        <div className="btns flex h-[20px]">
-                          <div
-                            className="minus w-full hover:bg-[#EB3E32] hover:text-white transition-all duration-200 font-extrabold hover:border-[#EB3E32]  cursor-pointer flex justify-center items-center text-center text-xl border h-full selection:w-20"
-                            onClick={decrease}
-                          >
-                            -
-                          </div>
-                          <div
-                            className="plus w-full hover:bg-[#EB3E32] hover:text-white transition-all duration-200 font-extrabold hover:border-[#EB3E32]  cursor-pointer flex justify-center items-center text-center text-xl border h-full selection:w-20"
-                            onClick={increase}
-                          >
-                            +
+                  <Authenticated>
+                    <div className="flex mt-10 gap-5 max-lg:mt-5">
+                      <div className="amount">
+                        <div className="w-[80px] h-[50px] border rounded-none">
+                          <input
+                            className="border text-xl w-full h-[30px] text-center focus:outline-none "
+                            type="text"
+                            value={num}
+                            onChange={(e) => setNum(e.target.value)}
+                          />
+                          <div className="btns flex h-[20px]">
+                            <div
+                              className="minus w-full hover:bg-[#EB3E32] hover:text-white transition-all duration-200 font-extrabold hover:border-[#EB3E32]  cursor-pointer flex justify-center items-center text-center text-xl border h-full selection:w-20"
+                              onClick={decrease}
+                            >
+                              -
+                            </div>
+                            <div
+                              className="plus w-full hover:bg-[#EB3E32] hover:text-white transition-all duration-200 font-extrabold hover:border-[#EB3E32]  cursor-pointer flex justify-center items-center text-center text-xl border h-full selection:w-20"
+                              onClick={increase}
+                            >
+                              +
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <button
-                      className="bg-[#EB3E32] border-[#EB3E32] hover:bg-white border transition-all duration-200 hover:text-[#EB3E32] text-white w-fit px-10 py-1  text-md font-bold"
-                      onClick={() => {
-                        if (!isNaN(num) && num >= 0) {
-                          const product = {
-                            asin: id,
-                            price: getLastPrice(item.price),
-                            name: item.title,
-                            amount: parseFloat(num),
-                            img: item.images_list[0],
-                          };
-                          if (product.asin && product.price && product.name) {
-                            dispatch(addToCart({ userId: user.id, product }));
+                      <button
+                        className="bg-[#EB3E32] border-[#EB3E32] hover:bg-white border transition-all duration-200 hover:text-[#EB3E32] text-white w-fit px-10 py-1  text-md font-bold"
+                        onClick={() => {
+                          if (!isNaN(num) && num >= 0) {
+                            const product = {
+                              asin: id,
+                              price: getLastPrice(item.price),
+                              name: item.title,
+                              amount: parseFloat(num),
+                              img: item.images_list[0],
+                            };
+                            if (product.asin && product.price && product.name) {
+                              dispatch(addToCart({ userId: user.id, product }));
+                            } else {
+                              console.error("Invalid product object:", product);
+                            }
                           } else {
-                            console.error("Invalid product object:", product);
+                            return;
                           }
-                        } else {
-                          return;
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    </div>
+                    <div className="wishlist my-5">
+                      <button
+                        className=" border-[#EB3E32] hover:border-white transition-all duration-200 hover:bg-[#26292e] hover:text-white border px-5 py-3 text-[#EB3E32] font-bold click"
+                        onClick={() =>
+                          handleAddToWishlist({
+                            price: parseFloat(getLastPrice(item.price)),
+                            name: item.title,
+                            asin: id,
+                            img: item.images_list[0],
+                          })
                         }
-                      }}
-                    >
-                      Add to cart
-                    </button>
-                  </div>
-                  <div className="wishlist my-5">
-                    <button
-                      className=" border-[#EB3E32] hover:border-white transition-all duration-200 hover:bg-[#26292e] hover:text-white border px-5 py-3 text-[#EB3E32] font-bold click"
-                      onClick={() =>
-                        handleAddToWishlist({
-                          price: parseFloat(getLastPrice(item.price)),
-                          name: item.title,
-                          asin: id,
-                          img: item.images_list[0],
-                        })
-                      }
-                    >
-                      Add to Wishlist
-                    </button>
-                  </div>
+                      >
+                        Add to Wishlist
+                      </button>
+                    </div>
+                  </Authenticated>
                 </div>
               </div>
             </div>
